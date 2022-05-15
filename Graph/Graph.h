@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QMouseEvent>
+#include <QLineEdit>
 #include "drawPanel.h"
 
 class Graph : public QWidget
@@ -18,9 +19,11 @@ public:
     void mouseReleaseEvent(QMouseEvent* event) override;
 
 protected slots:
-
+    void onClickedCalculateButton();
 private:
     bool scribbling;
     QLabel* lbl;
+    QLineEdit* editX;
+    QLineEdit* editY;
     drawPanel* panel;
 };

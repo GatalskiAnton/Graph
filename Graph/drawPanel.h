@@ -10,6 +10,6 @@ public:
 protected:
 	void paintEvent(QPaintEvent* );
 private:
-	
+	QPainter* painter;
 };
 
