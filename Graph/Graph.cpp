@@ -23,31 +23,31 @@ void Graph::mousePressEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
-		scribbling = true;
 		lbl->show();
 	}
 }
 
 void Graph::mouseMoveEvent(QMouseEvent* event)
 {
-	if ((event->buttons() & Qt::LeftButton) && scribbling)
+	if ((event->buttons() & Qt::LeftButton))
 	{
 		QPointF point = event->pos();
-		lbl->setText(QString::number(((point.rx() - 450) / 32) * (point.rx() - 450) / 32 + sin((((point.rx() - 450) / 32)) * (PI / 90))));
+		double x = point.rx() - width() / 2;
+		double dx = panel->getDx();
+		lbl->setText(QString::number(func(x / 33)));
 		lbl->setGeometry(point.rx() + (width() + height()) / 180, point.ry() + (width() + height()) / 180, (width() + height()) / 36, (width() + height()) / 36);
 	}
 }
 
 void Graph::mouseReleaseEvent(QMouseEvent* event)
 {
-	if (event->button() == Qt::LeftButton && scribbling)
+	if (event->button() == Qt::LeftButton )
 	{
-		scribbling == false;
 		lbl->hide();
 	}
 }
 void Graph::onClickedCalculateButton()
 {
-	editY->setText(QString::number(editX->text().toDouble() * editX->text().toDouble()) + (sin(editX->text().toDouble() * (PI / 180))));
+	editY->setText(QString::number(func(editX->text().toDouble())));
 }
 

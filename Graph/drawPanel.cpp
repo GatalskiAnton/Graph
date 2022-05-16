@@ -1,8 +1,15 @@
 #include "drawPanel.h"
 #define PI 3.141592653589793
 
+double func(double x)
+{
+	return pow(x, 2) + sin(x);
+}
+
 void drawPanel::paintEvent(QPaintEvent* event)
 {
+	const int lBorder = -3;
+	const int rBorder = 3;
 	painter = new QPainter(this);
 	int midX = width() / 2;
 	int midY = height() / 2;
@@ -35,11 +42,15 @@ void drawPanel::paintEvent(QPaintEvent* event)
 	painter->drawPoint(0, 0);
 	painter->setPen(QPen(QColor(7,94,223), 3));
 
-	for (double i = -13*dx; i < 13* dx; i+=dx*0.01)
+	for (double i = lBorder *dx; i < rBorder* dx; i+=dx*0.01)
 	{
 		QPointF point;
 		point.rx() = i;
-		point.ry() = -point.rx() * point.rx() / dy -(sin(point.rx() * (PI / 90))) *dy;
+		point.ry() = -func(point.rx() / dx) * dx;
 		painter->drawPoint(point);
 	}
 }
+
+double drawPanel::getDx(){	return dx;}
+
+double drawPanel::getDy(){	return dy;}

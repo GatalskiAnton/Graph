@@ -21,7 +21,6 @@ public:
 protected slots:
     void onClickedCalculateButton();
 private:
-    bool scribbling;
     QLabel* lbl;
     QLineEdit* editX;
     QLineEdit* editY;

@@ -1,3 +1,7 @@
 ﻿  Reading Qt configuration (D:/QT/5.15.2/msvc2019_64/bin/qmake)
+  moc Graph.h
+  Graph.cpp
   drawPanel.cpp
+  main.cpp
+  moc_Graph.cpp
   Graph.vcxproj -> C:\Users\ag629\source\repos\Graph\x64\Debug\Graph.exe
