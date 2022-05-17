@@ -51,6 +51,11 @@ void drawPanel::paintEvent(QPaintEvent* event)
 	}
 }
 
+void drawPanel::point(double x, double y)
+{
+
+}
+
 double drawPanel::getDx(){	return dx;}
 
 double drawPanel::getDy(){	return dy;}

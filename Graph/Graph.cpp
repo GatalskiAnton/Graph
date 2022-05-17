@@ -19,11 +19,28 @@ Graph::Graph(QWidget* parent)
 	setLayout(mainLayout);
 }
 
+void Graph::paintEvent(QPaintEvent* event) 
+{
+	painter = new QPainter(this);
+	painter->setPen(QPen(Qt::black, 8));
+	if (scribbling == true)
+	{
+		point(x,y);
+	}
+	
+}
+
+void Graph::point(double x, double y)
+{
+	painter->drawPoint(x, y);
+}
+
 void Graph::mousePressEvent(QMouseEvent* event)
 {
 	if (event->button() == Qt::LeftButton)
 	{
 		lbl->show();
+		scribbling = true;
 	}
 }
 
@@ -32,10 +49,14 @@ void Graph::mouseMoveEvent(QMouseEvent* event)
 	if ((event->buttons() & Qt::LeftButton))
 	{
 		QPointF point = event->pos();
-		double x = point.rx() - width() / 2;
+		double X = point.rx() - width() / 2;
 		double dx = panel->getDx();
-		lbl->setText(QString::number(func(x / 33)));
+		lbl->setText(QString::number(func(X / 33)));
 		lbl->setGeometry(point.rx() + (width() + height()) / 180, point.ry() + (width() + height()) / 180, (width() + height()) / 36, (width() + height()) / 36);
+		x = event->pos().rx();
+		y = func((event->pos().rx() - width() / 2) / 33);
+		update();
+
 	}
 }
 
@@ -44,6 +65,9 @@ void Graph::mouseReleaseEvent(QMouseEvent* event)
 	if (event->button() == Qt::LeftButton )
 	{
 		lbl->hide();
+		scribbling = false;
+		update();
+
 	}
 }
 void Graph::onClickedCalculateButton()
